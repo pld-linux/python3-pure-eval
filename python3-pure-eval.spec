@@ -1,4 +1,9 @@
+#
+# Conditional build:
+%bcond_without	tests	# unit tests
+
 Summary:	Safely evaluate AST nodes without side effects
+Summary(pl.UTF-8):	Bezpieczne wyliczanie węzłów AST bez efektów ubocznych
 Name:		python3-pure-eval
 Version:	0.2.3
 Release:	1
@@ -23,11 +28,19 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Safely evaluate AST nodes without side effects.
 
+%description -l pl.UTF-8
+Bezpieczne wyliczanie węzłów AST bez efektów ubocznych.
+
 %prep
 %setup -q -n pure_eval-%{version}
 
 %build
 %py3_build_pyproject
+
+%if %{with tests}
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+%{__python3} -m pytest tests
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT

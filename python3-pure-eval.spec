@@ -20,6 +20,9 @@ BuildRequires:	python3-modules >= 1:3.7
 BuildRequires:	python3-setuptools >= 1:41
 BuildRequires:	python3-setuptools_scm >= 3.4.3
 BuildRequires:	python3-wheel
+%if %{with tests}
+BuildRequires:	python3-pytest
+%endif
 BuildRequires:	rpmbuild(macros) >= 2.044
 Requires:	python3-modules >= 1:3.7
 BuildArch:	noarch
